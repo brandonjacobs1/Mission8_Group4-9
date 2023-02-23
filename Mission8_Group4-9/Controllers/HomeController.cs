@@ -48,13 +48,12 @@ namespace Mission8_Group4_9.Controllers
         public IActionResult TaskForumNAME()
         {
             // Change Categories name to match 
-            // Change categories depending on TaskContect db name
-            ViewBag.Categories = taskContext.categories.ToList();
+            ViewBag.Categories = taskContext.Categories.ToList();
 
             return View();
         }
 
-        //Change name to correct nmdoel name
+        //Change name to correct model name
         [HttpPost]
         public IActionResult TaskForumNAME(Tasks ar)
         {
@@ -62,13 +61,14 @@ namespace Mission8_Group4_9.Controllers
             {
                 taskContext.Add(ar);
                 taskContext.SaveChanges();
+
+                //Change where the view goes to
                 return View("Confirmation", ar);
 
             }
             else
             {
-                //Change both categories names
-                ViewBag.Categories = taskContext.categories.ToList();
+                ViewBag.Categories = taskContext.Categories.ToList();
                 return View(ar);
             }
         }
@@ -87,7 +87,6 @@ namespace Mission8_Group4_9.Controllers
             //change responses to the task name in the context file and Category as well in the models
             var applications = taskContext.Tasks
                 .Include(x => x.Category)
-                .OrderBy(x => x.Title)
                 .ToList();
             return View(applications);
         }
@@ -99,21 +98,18 @@ namespace Mission8_Group4_9.Controllers
         //These are the edit functions
 
 
-        //this takforumid can be whatever name
         [HttpGet]
         public IActionResult Edit(int taskforumid)
         {
-            ViewBag.Categories = taskContext.categories.ToList();
+            ViewBag.Categories = taskContext.Categories.ToList();
 
-            //Change the Capital taskforumID to the right one
-            var application = taskContext.Tasks.Single(x => x.MovieForumID == taskforumid);
+            var application = taskContext.Tasks.Single(x => x.TaskID == taskforumid);
 
             //Chnage TaskForum to whatever it is
             return View("TaskForum", application);
         }
 
 
-        //Name should be right for task
         [HttpPost]
         public IActionResult Edit(Tasks blah)
         {
@@ -141,18 +137,17 @@ namespace Mission8_Group4_9.Controllers
         public IActionResult Delete(int taskforumid)
         {
             //Change id to the right id
-            var application = taskContext.Tasks.Single(x => x.MovieForumID == taskforumid);
+            var application = taskContext.Tasks.Single(x => x.TaskID == taskforumid);
             return View(application);
         }
 
         [HttpPost]
         public IActionResult Delete(Tasks blah)
         {
-            //FIX THIS
             taskContext.Tasks.Remove(blah);
             taskContext.SaveChanges();
 
-
+            //Change to the right action
             return RedirectToAction("ViewTasks");
         }
 
