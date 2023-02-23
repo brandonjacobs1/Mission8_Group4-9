@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Mission8_Group4_9.Models
 {
-    public class Task
+    public class Tasks
     {
         [Key]
+        [Required]
+        public int TaskID { get; set; }
         [Required]
         public string TaskName { get; set; }
         public DateTime DueDate { get; set; }

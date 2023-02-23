@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Mission8_Group4_9.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace MIssion6_jacobs27.Models
 
         }
 
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Tasks> Tasks { get; set; }
         public DbSet<Category> Categories { get; set; }
 
         //seeding
@@ -23,84 +24,33 @@ namespace MIssion6_jacobs27.Models
                 new Category
                 {
                     CategoryID = 1,
-                    CategoryName = "Action/Adventure"
+                    CategoryName = "Home"
                 },
                 new Category
                 {
                     CategoryID = 2,
-                    CategoryName = "Comedy"
+                    CategoryName = "School"
                 },
                 new Category
                 {
                     CategoryID = 3,
-                    CategoryName = "Drama"
+                    CategoryName = "Work"
                 },
                 new Category
                 {
                     CategoryID = 4,
-                    CategoryName = "Family"
-                },
-                new Category
+                    CategoryName = "Church"
+                }
+                );
+            mb.Entity<Tasks>().HasData(
+                new Tasks
                 {
-                    CategoryID = 5,
-                    CategoryName = "Horror/Suspense"
-                },
-                new Category
-                {
-                    CategoryID = 6,
-                    CategoryName = "Miscellaneous"
-                },
-                new Category
-                {
-                    CategoryID = 7,
-                    CategoryName = "Television"
-                },
-                new Category
-                {
-                    CategoryID = 8,
-                    CategoryName = "VHS"
-                },
-                new Category
-                {
-                    CategoryID = 9,
-                    CategoryName = "Other"
-                });
-            mb.Entity<Movie>().HasData(
-                new Movie
-                {
-                    MovieID = 2,
-                    Title = "Starwars: Episode 2 - Attack of the Clones",
-                    Year = "2002",
+                    TaskID = 1,
+                    TaskName = "test",
+                    DueDate = DateTime.Now,
+                    Quadrant = 1,
                     CategoryID = 1,
-                    Director = "George Lucas",
-                    Rating = "PG",
-                    Edited = false,
-                    LentTo = "Brandon Jacobs",
-                    Notes = "No Notes"
-                },
-                new Movie
-                {
-                    MovieID = 1,
-                    Title = "Starwars: Episode 1 - The Phantom Menace",
-                    Year = "1999",
-                    CategoryID = 1,
-                    Director = "George Lucas",
-                    Rating = "PG",
-                    Edited = false,
-                    LentTo = "Brandon Jacobs",
-                    Notes = "No Notes"
-                },
-                new Movie
-                {
-                    MovieID = 3,
-                    Title = "Starwars: Episode 3 - Revenge of the Sith",
-                    Year = "2005",
-                    CategoryID = 1,
-                    Director = "George Lucas",
-                    Rating = "PG",
-                    Edited = false,
-                    LentTo = "Brandon Jacobs",
-                    Notes = "No Notes"
+                    Completed = false
                 });
         }
     }
