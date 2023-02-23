@@ -24,6 +24,11 @@ namespace Mission8_Group4_9
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<TaskContext>(options =>
+            {
+                options.UseSqlite(Configuration["ConnectionStrings:TaskConnection"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +55,7 @@ namespace Mission8_Group4_9
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{taskId?}");
             });
         }
     }
