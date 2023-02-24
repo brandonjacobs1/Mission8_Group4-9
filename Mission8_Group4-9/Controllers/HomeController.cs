@@ -45,7 +45,7 @@ namespace Mission8_Group4_9.Controllers
         //Task forum functionality here
 
         [HttpGet]
-        public IActionResult TaskForumNAME()
+        public IActionResult AddTask()
         {
             // Change Categories name to match 
             ViewBag.Categories = taskContext.Categories.ToList();
@@ -55,7 +55,7 @@ namespace Mission8_Group4_9.Controllers
 
         //Change name to correct model name
         [HttpPost]
-        public IActionResult TaskForumNAME(Tasks ar)
+        public IActionResult AddTask(Tasks ar)
         {
             if (ModelState.IsValid)
             {
@@ -63,8 +63,7 @@ namespace Mission8_Group4_9.Controllers
                 taskContext.SaveChanges();
 
                 //Change where the view goes to
-                return View("Confirmation", ar);
-
+                return View("Confirmation",ar);
             }
             else
             {
@@ -106,7 +105,7 @@ namespace Mission8_Group4_9.Controllers
             var application = taskContext.Tasks.Single(x => x.TaskID == taskforumid);
 
             //Chnage TaskForum to whatever it is
-            return View("TaskForum", application);
+            return View("AddTask", application);
         }
 
 
