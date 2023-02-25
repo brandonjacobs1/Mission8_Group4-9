@@ -81,7 +81,7 @@ namespace Mission8_Group4_9.Controllers
 
         //May need to change ViewTasks name
         [HttpGet]
-        public IActionResult ViewTasks()
+        public IActionResult Quadrants()
         {
             //change responses to the task name in the context file and Category as well in the models
             var applications = taskContext.Tasks
@@ -98,11 +98,11 @@ namespace Mission8_Group4_9.Controllers
 
 
         [HttpGet]
-        public IActionResult Edit(int taskforumid)
+        public IActionResult Edit(int taskId)
         {
             ViewBag.Categories = taskContext.Categories.ToList();
 
-            var application = taskContext.Tasks.Single(x => x.TaskID == taskforumid);
+            var application = taskContext.Tasks.Single(x => x.TaskID == taskId);
 
             //Chnage TaskForum to whatever it is
             return View("AddTask", application);
@@ -118,25 +118,17 @@ namespace Mission8_Group4_9.Controllers
             taskContext.SaveChanges();
 
             //ViewTasks may be different
-            return RedirectToAction("ViewTasks");
+            return RedirectToAction("Quadrants");
 
 
         }
 
-
-
-
-
-
-
-
         // These are the delete functions
 
         [HttpGet]
-        public IActionResult Delete(int taskforumid)
+        public IActionResult Delete(int taskId)
         {
-            //Change id to the right id
-            var application = taskContext.Tasks.Single(x => x.TaskID == taskforumid);
+            var application = taskContext.Tasks.Single(x => x.TaskID == taskId);
             return View(application);
         }
 
@@ -146,8 +138,7 @@ namespace Mission8_Group4_9.Controllers
             taskContext.Tasks.Remove(blah);
             taskContext.SaveChanges();
 
-            //Change to the right action
-            return RedirectToAction("ViewTasks");
+            return RedirectToAction("Quadrants");
         }
 
     }
